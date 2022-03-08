@@ -9,23 +9,42 @@ if (!TEST_ENVIRONMENT) {
 function createCheckBox (index) {
   return '<div class="custom-checkbox-' + index +'" style="width: 20px;height: 20px;cursor:pointer"></div>'
 }
-function createSwitchBox (index) {
+function createSwitchBox (index,list) {
+  // 判断是否开启或者关闭返回不同的状态
+  if (!list[index].isStart) {
+    return `<div style="position:absolute;top:50%;right: 10px;transform: translateY(-50%);">
+              <div style="position:relative;width:50px;height:20px;">
+                <div id="switch-container-${index}" style="position: absolute;width: 50px;height: 20px;background-color: red;border-radius: 50px;">
+                  <div id="switch-activeBox-${index}" style="width: 0px;
+                  height: 100%;
+                  border-top-left-radius: 50px;
+                  border-bottom-left-radius: 50px;
+                  position: absolute;
+                  background-color: green;"></div>
+                  <svg style="width:100%;height:100%;position:absolute;">
+                      <circle  id="c-${index}" cx="10" cy="10" r="10" style="fill:white; stroke:gray; stroke-width:1;"/>
+                  </svg>
+                </div>
+              </div>
+            </div>`
+  }
   return `<div style="position:absolute;top:50%;right: 10px;transform: translateY(-50%);">
             <div style="position:relative;width:50px;height:20px;">
               <div id="switch-container-${index}" style="position: absolute;width: 50px;height: 20px;background-color: red;border-radius: 50px;">
-                <div id="switch-activeBox-${index}" style="width: 0px;
+                <div id="switch-activeBox-${index}" style="width: 40px;
                 height: 100%;
                 border-top-left-radius: 50px;
                 border-bottom-left-radius: 50px;
                 position: absolute;
                 background-color: green;"></div>
                 <svg style="width:100%;height:100%;position:absolute;">
-                    <circle  id="c-${index}" cx="10" cy="10" r="10" style="fill:white; stroke:gray; stroke-width:1;"/>
+                    <circle  id="c-${index}" cx="40" cy="10" r="10" style="fill:white; stroke:gray; stroke-width:1;"/>
                 </svg>
               </div>
             </div>
           </div>`
 }
+
 function createSwitchBoxEvent (list) {
   for (let index = 0; index < list.length; index++) {
     let id = 'c-' + index
@@ -100,7 +119,7 @@ function initDOM () {
       s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px">'
       // 真正内容
       // s = s + createCheckBox(i)
-      s = s + createSwitchBox(i)
+      s = s + createSwitchBox(i,list)
       // 时间
       s = s + '<div style="position:absolute;top:5px;left:5px;font-weight: 900;">' + normlizeTime(time.hour) + ':' + normlizeTime(time.minute) + '</div>'
       s = s + '<div style="position:absolute;bottom:5px;left:15px;"><img width="20" height="20" src="./png/clock1.jpg"></div>'
@@ -121,22 +140,7 @@ function normlizeTime (num) {
   if (num < 10) return '0'.concat(num)
   return num
 }
-// function refreshDOM (list) {
-//   for (var i = 0; i< list.length; i++) {
-//     const NAME = 'custom-checkbox-' + i
-//     let checkBox = document.getElementsByClassName(NAME)[0]
-//     console.log(checkBox)
-//     checkBox.addEventListener('click', function (e) {
-//       let color = checkBox.style.backgroundColor
-//       console.log(color)
-//       if (color == checkBoxInitColor) {
-//         checkBox.style.backgroundColor = checkBoxActiveColor
-//       } else {
-//         checkBox.style.backgroundColor = checkBoxInitColor
-//       }
-//     })
-//   }
-// }
+
 function getDate () {
   const DATE = new Date()
   let hourConvertSecond = DATE.getHours() * 3600

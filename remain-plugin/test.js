@@ -7,7 +7,13 @@ if (TEST_ENVIRONMENT) {
     remain: [
       {
         time: 23876,
-        content: '我要睡觉啦'
+        content: '我要睡觉啦',
+        isStart: true
+      },
+      {
+        time: 80807,
+        content: '测试一下长字符串会有',
+        isStart: false
       }
     ]
   }
