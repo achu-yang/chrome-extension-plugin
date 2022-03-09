@@ -44,17 +44,7 @@ function createSwitchBox (index,list) {
             </div>
           </div>`
 }
-// function createSwitchBoxCss (list) {
-//   let content = ''
-//   for (let i = 0; i < list.length; i++) {
-//     s  += `
-  
-//     `
-//   }
-//   let style = document.createElement('style')
-//   style = content
-//   document.body.appendChild(style)
-// }
+
 function createSwitchBoxEvent (list) {
   for (let index = 0; index < list.length; index++) {
     let id = 'c-' + index
@@ -86,6 +76,29 @@ function createSwitchBoxEvent (list) {
     })
   }
 }
+
+function handlerText (text) {
+  let textType = {
+    singleRow: 7,
+    doubleRow: 13,
+    multiRow: 13
+  }
+  console.log(text)
+  let list = text.split('')
+  let result = ''
+  if (list.length < textType.singleRow) {
+    result = list.join('')
+    return '<div style="position:absolute;left:60px;top:17px;width:100px;display:flex;flex-wrap: wrap;">' + result + '</div>'
+  }
+  else if (list.length < textType.doubleRow) {
+    result = list.join('')
+  }
+  else if (list.length > textType.multiRow) {
+    list.splice(11,list.length - 11)
+    result = list.join('') + '...'
+  }
+  return '<div style="position:absolute;left:60px;top:10px;width:100px;display:flex;flex-wrap: wrap;">' + result + '</div>'
+}
 function initDOM () {
   // 添加按钮隐藏
   let addEvent = document.getElementById('addEvent')
@@ -115,14 +128,14 @@ function initDOM () {
     for (var i = 0; i< list.length; i++) {
       let time = convertDate(list[i].time)
       // 外壳
-      s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px">'
+      s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px;margin-top:10px;">'
       // 真正内容
       // s = s + createCheckBox(i)
       s = s + createSwitchBox(i,list)
       // 时间
       s = s + '<div style="position:absolute;top:5px;left:5px;font-weight: 900;">' + normlizeTime(time.hour) + ':' + normlizeTime(time.minute) + '</div>'
       s = s + '<div style="position:absolute;bottom:5px;left:15px;"><img width="20" height="20" src="./png/clock1.jpg"></div>'
-      s = s + '<div style="position:absolute;left:60px;top:10px;width:100px;display:flex;flex-wrap: wrap;">' + list[i].content + '</div>'
+      s = s + handlerText(list[i].content)
       s = s + '</div>'
     }
     document.getElementById('remian-content').innerHTML = s
@@ -135,6 +148,7 @@ function initDOM () {
 }
 
 initDOM()
+
 function normlizeTime (num) {
   if (num < 10) return '0'.concat(num)
   return num
@@ -167,7 +181,8 @@ function setTimeTask (hour, minute) {
 /**
  * obj = {
  *  time: '',
- *  content: ''
+ *  content: '',
+ *  isStart: true
  * }
  * 
  */
@@ -179,6 +194,7 @@ function setStorage (obj) {
   list.push(obj)
   console.log(list)
   console.log(backgroundLocalStorage)
+  // 按时间排序
   let newlist = sortFun(list)
   backgroundLocalStorage.setItem("remain", JSON.stringify(newlist))
 }

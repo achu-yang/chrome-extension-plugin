@@ -6,14 +6,24 @@ if (TEST_ENVIRONMENT) {
     },
     remain: [
       {
-        time: 23876,
-        content: '我要睡觉啦',
+        time: 43260,
+        content: '工作再忙，也不要忘记吃饭哟！',
         isStart: true
       },
       {
-        time: 80807,
-        content: '测试一下长字符串会有',
-        isStart: false
+        time: 53100,
+        content: '红 ? 惊喜 : 惊吓',
+        isStart: false,
+      },
+      {
+        time: '64860',
+        content: '工作再忙，也不要忘记吃饭哟！',
+        isStart: true
+      },
+      {
+        time: '64860',
+        content: '工作再忙',
+        isStart: true
       }
     ]
   }

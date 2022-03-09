@@ -31,9 +31,19 @@
 
 let list = [
   {
-    time: 39900,
-    content: '我要睡觉啦',
+    time: 43260,
+    content: '工作再忙，也不要忘记吃饭哟！',
     isStart: true
+  },
+  {
+    time: 53100,
+    content: '红 ? 惊喜 : 惊吓',
+    isStart: false,
+  },
+  {
+    time: 64860,
+    content: '工作再忙，也不要忘记吃饭哟！',
+    time: true
   }
 ]
 localStorage.setItem("remain", JSON.stringify(list))
