@@ -22,7 +22,7 @@ function createSwitchBox (index,list) {
                   position: absolute;
                   background-color: green;"></div>
                   <svg style="width:100%;height:100%;position:absolute;">
-                      <circle  id="c-${index}" cx="10" cy="10" r="10" style="fill:white; stroke:gray; stroke-width:1;"/>
+                      <circle  id="c-${index}" cx="10" cy="10" r="10" style="cursor:pointer;fill:white; stroke:gray; stroke-width:1;"/>
                   </svg>
                 </div>
               </div>
@@ -38,13 +38,23 @@ function createSwitchBox (index,list) {
                 position: absolute;
                 background-color: green;"></div>
                 <svg style="width:100%;height:100%;position:absolute;">
-                    <circle  id="c-${index}" cx="40" cy="10" r="10" style="fill:white; stroke:gray; stroke-width:1;"/>
+                    <circle  id="c-${index}" cx="40" cy="10" r="10" style="cursor:pointer;fill:white; stroke:gray; stroke-width:1;"/>
                 </svg>
               </div>
             </div>
           </div>`
 }
-
+// function createSwitchBoxCss (list) {
+//   let content = ''
+//   for (let i = 0; i < list.length; i++) {
+//     s  += `
+  
+//     `
+//   }
+//   let style = document.createElement('style')
+//   style = content
+//   document.body.appendChild(style)
+// }
 function createSwitchBoxEvent (list) {
   for (let index = 0; index < list.length; index++) {
     let id = 'c-' + index
@@ -77,23 +87,12 @@ function createSwitchBoxEvent (list) {
   }
 }
 function initDOM () {
-  // 
+  // 添加按钮隐藏
   let addEvent = document.getElementById('addEvent')
   addEvent.style.display = 'none'
-  // 折叠栏DOM操作
-  // let foldBarContent= document.getElementsByClassName('fold-bar-content')[0]
-  // let cacheFoldBarContentChild = null
-  // foldBarContent.addEventListener('mouseenter', function (e) {
-  //   // 移入改变背景颜色
-  //   foldBarContent.style.backgroundColor = FoldBarContentActivateColor
-  //   cacheFoldBarContentChild = foldBarContent.innerHTML
-  //   foldBarContent.innerHTML = '<div style="color: #fff">显示</div>'
-  // })
-  // foldBarContent.addEventListener('mouseleave', function () {
-  //   foldBarContent.style.backgroundColor = '#fff'
-  //   foldBarContent.innerHTML = cacheFoldBarContentChild
-  // })
-  // 确认DOM操作
+
+  // DOM事件绑定
+  // 确认
   let confirm = document.getElementById('confirm')
   confirm.addEventListener('click', function (e) {
     let hour = document.getElementById('input-hour').value
@@ -184,14 +183,3 @@ function setStorage (obj) {
   backgroundLocalStorage.setItem("remain", JSON.stringify(newlist))
 }
 
-
-// function confirmCheckBox (index) {
-//   let name = 'custom-checkbox-' + index
-//   let dom = document.getElementsByClassName(name)[index]
-//   dom.style.backgroundColor = '#ddd'
-// }
-// function cancelCheckBox (index) {
-//   let name = 'custom-checkbox-' + index
-//   let dom = document.getElementsByClassName(name)[index]
-//   dom.style.backgroundColor = '#fff'
-// }
