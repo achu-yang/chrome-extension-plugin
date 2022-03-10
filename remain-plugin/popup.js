@@ -52,6 +52,8 @@ function createSwitchBoxEvent (list) {
     const switchW = 50
     let circle = document.getElementById(id);
     circle.addEventListener('click', function (e) {
+      // 取消冒泡事件，避免与长按冲突
+      e.preventDefault()
       let activeDiv = document.getElementById('switch-activeBox-' + index)
       if (e.offsetX < circleR * 2){
         for (let i = 1; i < 11; i++) {
@@ -75,6 +77,18 @@ function createSwitchBoxEvent (list) {
       }
     })
   }
+}
+function crateLongTouchEvent (list) {
+  for (let index = 0; index < list.length; index++) {
+    let id = 'remian-content-box-' + index
+    const circleR = 10
+    const switchW = 50
+    let div = document.getElementById(id);
+    div.addEventListener('click', function (e) {
+      // 取消冒泡事件，避免与长按冲突
+      e.preventDefault()
+    })
+  } 
 }
 
 function handlerText (text) {
@@ -105,7 +119,7 @@ function initDOM () {
   addEvent.style.display = 'none'
 
   // DOM事件绑定
-  // 确认
+  // 确认按钮
   let confirm = document.getElementById('confirm')
   confirm.addEventListener('click', function (e) {
     let hour = document.getElementById('input-hour').value
@@ -113,22 +127,24 @@ function initDOM () {
     addEvent.style.display = 'none'
     setTimeTask(hour, minute)
   })
+  // 取消按钮
   let cancel = document.getElementById('cancel')
   cancel.addEventListener('click', function () {
     addEvent.style.display = 'none'
   })
+  // 悬浮添加按钮
   let suspensionAdd = document.getElementById('suspensionAdd')
   suspensionAdd.addEventListener('click', function () {
     addEvent.style.display = 'block'
   })
-  
+  // 渲染提醒列表
   let list = JSON.parse(backgroundLocalStorage.getItem("remain"));
   (function(){
     let s = ''
     for (var i = 0; i< list.length; i++) {
       let time = convertDate(list[i].time)
       // 外壳
-      s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px;margin-top:10px;">'
+      s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px;margin-top:10px;" '+ 'id="remian-content-box-' + i+ '"'+'>'
       // 真正内容
       // s = s + createCheckBox(i)
       s = s + createSwitchBox(i,list)
@@ -139,6 +155,9 @@ function initDOM () {
       s = s + '</div>'
     }
     document.getElementById('remian-content').innerHTML = s
+    // 添加长按删除事件
+    crateLongTouchEvent(list)
+    // 添加提醒事件
     createSwitchBoxEvent(list)
     // refreshDOM(list)
     num += 1
