@@ -18,7 +18,7 @@ function deepClone (obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 function sortFun(arr){ //封装一个名为sortFun的函数
-  console.log(arr.length)
+  // console.log(arr.length)
   if (arr.length == 1) return arr
   let temp = 0; //定义一个变量，作为变量交换的中间量
   for(let i = 0; i < arr.length; i++){    //确定循环的次数
@@ -62,7 +62,7 @@ function convertName (str) {
     }
     s += e
   });
-  console.log(s)
+  // console.log(s)
   return s
 }
 // convertName('LabcB')
