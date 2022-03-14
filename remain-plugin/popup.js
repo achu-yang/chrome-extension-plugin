@@ -81,12 +81,33 @@ function createSwitchBoxEvent (list) {
 function crateLongTouchEvent (list) {
   for (let index = 0; index < list.length; index++) {
     let id = 'remian-content-box-' + index
-    const circleR = 10
-    const switchW = 50
     let div = document.getElementById(id);
-    div.addEventListener('click', function (e) {
-      // 取消冒泡事件，避免与长按冲突
-      e.preventDefault()
+
+    let timer;
+    let flag = false;
+    div.addEventListener('mousedown', function (e) {
+      // 取消冒泡事件，避免冲突
+      let tmpContent = JSON.parse(JSON.stringify(div.innerHTML))
+      timer = setTimeout(()=>{
+        div.innerHTML = `<div id ="${id}-delete">删除</div>`;
+        let _delete = document.getElementById('remian-content-box-' + index + '-delete')
+        console.log(_delete)
+        _delete.addEventListener('click', function (e) {
+          e.preventDefault()
+          console.log('click')
+          console.log(tmpContent)
+          div.innerHTML = tmpContent
+        })
+      },500)
+    })
+    div.addEventListener('mouseup', function (e) {
+      // 取消冒泡事件，避免冲突
+      // e.preventDefault()
+      if (flag) {
+        
+      }
+      clearTimeout(timer)
+      flag = false;
     })
   } 
 }
