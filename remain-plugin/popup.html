@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;script-src * 'unsafe-inline'">
-    <link rel="stylesheet" href="myExtension.css" />
+    <link rel="stylesheet" href="./plugin.css">
 </head>
 
 <body>
@@ -67,7 +67,7 @@
       <div class="add" id="suspensionAdd"></div>
     </div>
     <div><img width="20" height="20" src="./png/clock.jpg"></img></div>
-    <script src="./test.js"></script>
+    <!-- <script src="./test.js"></script> -->
 </body>
 </html>
 <!-- <script src="./switch.js"></script> -->
@@ -75,78 +75,6 @@
 <script src="./icon.js"></script>
 <script src="./utils.js"></script>
 <script src="./popup.js"></script>
+<script>
 
-<style>
-/* 弹框大小 */
-html {
-    width: 300px;
-    height: 545px;
-    position: relative;
-    cursor: default;
-}
-body {
-  box-shadow: '0px 0px 3px 2px #DCDCDC';
-}
-.title {
-  text-align: center;
-  font-size: 20px;
-  margin: 10px 0px;
-}
-/* 按钮样式 */
-.button {
-  padding: 5px 10px;
-  border-radius: 10px;
-  display: inline-block;
-  justify-self: center;
-  background-color: #00BFFF;
-  color: #fff;
-  cursor: pointer;
-}
-.button:hover {
-  box-shadow: 0px 0px 3px 2px #DCDCDC;
-}
-/* 提醒输入表格 */
-.remain-talbe-cell {
-  display: flex;
-  /* justify-content: center; */
-}
-.cell-name {
-  margin-left: 5px;
-  flex: 1
-}
-.cell-other {
-  flex: 2;
-}
-/* 折叠栏样式 */
-.fold-bar {
-  width: 100%;
-  height: 40px;
-  border: 1px solid #00BFFF;
-  display: table;
-}
-.fold-bar-content {
-  display: table-cell;
-  /*设置文本水平居中*/
-  text-align:center; 
-  /*设置文本垂直居中*/
-  vertical-align:middle;
-  cursor: pointer;
-  transition: background-color .3s linear 0s;
-}
-.lower-triangular {
-	width:0;
-	height:0;
-	border-right:8px solid transparent;
-	border-left:8px solid transparent;
-	border-top:8px solid #ddd;
-}
-#remian-content {
-  width: 90%;
-  height: 330px;
-  padding-top: 10px;
-  margin: 0 auto;
-  box-shadow: 0px 0px 3px 2px #DCDCDC;
-}
-
-
-</style>
+</script>

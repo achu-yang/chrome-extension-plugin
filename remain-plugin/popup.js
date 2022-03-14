@@ -94,8 +94,8 @@ function crateLongTouchEvent (list) {
         console.log(_delete)
         _delete.addEventListener('click', function (e) {
           e.preventDefault()
-          console.log('click')
-          console.log(tmpContent)
+          // console.log('click')
+          // console.log(tmpContent)
           div.innerHTML = tmpContent
         })
       },500)
@@ -118,7 +118,7 @@ function handlerText (text) {
     doubleRow: 13,
     multiRow: 13
   }
-  console.log(text)
+  // console.log(text)
   let list = text.split('')
   let result = ''
   if (list.length < textType.singleRow) {
@@ -163,7 +163,9 @@ function initDOM () {
   (function(){
     let s = ''
     for (var i = 0; i< list.length; i++) {
+      console.log(list[i].time)
       let time = convertDate(list[i].time)
+      console.log(time)
       // 外壳
       s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px;margin-top:10px;" '+ 'id="remian-content-box-' + i+ '"'+'>'
       // 真正内容
