@@ -47,7 +47,8 @@
         // message(msg.message)
         // alert(msg.message)
       }
-        clearTimeout(timerList(msg.index))
+        clearTimeout(timerList[msg.index])
+        timerList[msg.index] = null;
     }
     });
     // message()
