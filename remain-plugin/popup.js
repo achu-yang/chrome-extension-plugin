@@ -167,7 +167,7 @@ function initDOM () {
       let time = convertDate(list[i].time)
       console.log(time)
       // 外壳
-      s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px;margin-top:10px;" '+ 'id="remian-content-box-' + i+ '"'+'>'
+      s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px;margin:10px 3px;" '+ 'id="remian-content-box-' + i+ '"'+'>'
       // 真正内容
       // s = s + createCheckBox(i)
       s = s + createSwitchBox(i,list)

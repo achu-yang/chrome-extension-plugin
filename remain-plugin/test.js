@@ -19,6 +19,26 @@ if (TEST_ENVIRONMENT) {
         time: '64860',
         content: '工作再忙，也不要忘记吃饭哟！',
         isStart: true
+      },
+      {
+        time: 53100,
+        content: '红 ? 惊喜 : 惊吓',
+        isStart: false,
+      },
+      {
+        time: '64860',
+        content: '工作再忙，也不要忘记吃饭哟！',
+        isStart: true
+      },
+      {
+        time: 53100,
+        content: '红 ? 惊喜 : 惊吓',
+        isStart: false,
+      },
+      {
+        time: '64860',
+        content: '工作再忙，也不要忘记吃饭哟！',
+        isStart: true
       }
     ]
   }
