@@ -146,6 +146,14 @@ function initDOM () {
     let hour = document.getElementById('input-hour').value
     let minute = document.getElementById('input-minute').value
     addEvent.style.display = 'none'
+    if (hour === '' || minute === '') {
+      updateAddEvent();
+      return;
+    }
+    if (!isVaildTime(hour,minute)) {
+      updateAddEvent();
+      return;
+    }
     setTimeTask(hour, minute)
   })
   // 取消按钮
@@ -156,10 +164,25 @@ function initDOM () {
   // 悬浮添加按钮
   let suspensionAdd = document.getElementById('suspensionAdd')
   suspensionAdd.addEventListener('click', function () {
+    // 显示
     addEvent.style.display = 'block'
+    // 人性化一点，输入框获得焦点
+    let inputHour = document.getElementById('input-hour')
+    let inputMinute = document.getElementById('input-minute')
+    inputHour.focus();
+    inputHour.addEventListener('keypress',function (e) {
+      inputMinute.focus()
+    })
+    inputMinute.addEventListener('keypress',function(e){
+      document.getElementById('remain-content').focus()
+    })
   })
   // 渲染提醒列表
   let list = JSON.parse(backgroundLocalStorage.getItem("remain"));
+  updateRemainList(list) 
+}
+
+function updateRemainList (list) {
   (function(){
     let s = ''
     for (var i = 0; i< list.length; i++) {
@@ -185,12 +208,11 @@ function initDOM () {
     // refreshDOM(list)
     num += 1
   })()
-
-  // 
 }
-
 initDOM()
-
+function isVaildTime (hour,minute) {
+  return (parseInt(minute) <= 60 && parseInt(minute) >= 0 && parseInt(hour) <= 24 && parseInt(hour) >= 0)
+}
 function normlizeTime (num) {
   if (num < 10) return '0'.concat(num)
   return num
@@ -205,20 +227,15 @@ function getDate () {
 }
 
 function setTimeTask (hour, minute) {
-  let remainTime = hour * 3600 + minute * 60
-  let timeDifferent = remainTime - getDate()
-  console.log(timeDifferent)
-  if (timeDifferent > 0) {
-    let content = document.getElementById('remain-content').value
-    console.log(content)
-    let obj = {
-      time: remainTime,
-      content: content
-    }
-    setStorage(obj)
-  } else {
-    alert('错误')
+  let remainTime = hour * 3600 + minute * 60;
+  let content = document.getElementById('remain-content').value;
+  if (content === '') return;
+  let obj = {
+    time: remainTime,
+    content: content,
+    isStart: true
   }
+  setStorage(obj)
 }
 /**
  * obj = {
@@ -234,10 +251,18 @@ function setStorage (obj) {
     list = []
   }
   list.push(obj)
-  console.log(list)
-  console.log(backgroundLocalStorage)
+  // console.log(list)
+  // console.log(backgroundLocalStorage)
   // 按时间排序
   let newlist = sortFun(list)
   backgroundLocalStorage.setItem("remain", JSON.stringify(newlist))
+  // 刷新DOM
+  updateRemainList(newlist);
+  updateAddEvent();
 }
 
+function updateAddEvent () {
+  document.getElementById('input-hour').value = ''
+  document.getElementById('input-minute').value = ''
+  document.getElementById('remain-content').value = ''
+}
