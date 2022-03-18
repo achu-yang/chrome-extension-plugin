@@ -209,7 +209,7 @@ function updateRemainList (list) {
     num += 1
   })()
 }
-initDOM()
+
 function isVaildTime (hour,minute) {
   return (parseInt(minute) <= 60 && parseInt(minute) >= 0 && parseInt(hour) <= 24 && parseInt(hour) >= 0)
 }
@@ -259,6 +259,9 @@ function setStorage (obj) {
   // 刷新DOM
   updateRemainList(newlist);
   updateAddEvent();
+  // 通知background，由background通知其他页面
+  // let port = chrome.extension.connect({name: "remain-plugin-channel"});
+  // port.postMessage({request: "updateLocalStorage"});
 }
 
 function updateAddEvent () {
@@ -266,3 +269,5 @@ function updateAddEvent () {
   document.getElementById('input-minute').value = ''
   document.getElementById('remain-content').value = ''
 }
+
+initDOM()

@@ -1,10 +1,10 @@
 (function (root) {
     // 建立双向通信
-    let timerList = []
     var port = chrome.extension.connect({name: "remain-plugin-channel"});
     // 该tab页面的id
     var id = undefined;
     var list = []
+    var timerList = []
     // 1、发送信息给background请求到当前tab页面的信息
     port.postMessage({request: "getCurrentTab"});
     port.onMessage.addListener(function(msg) {
@@ -17,23 +17,7 @@
           // console.log(id);
           // 获取存放在background中的localStorage
           storage = msg.localStorage
-          // JSON格式解析
-          list = JSON.parse(storage.remain)
-          // 遍历设置定时器
-          // setTimeout(() => {
-          //   port.postMessage({request: "confirmInfo", index: 1});
-          //   console.log("我运行了")
-          // }, 1000);
-          for (let i = 0; i < list.length; i++) {
-            let time = list[i].time - getDate() 
-            if (time > 0) {
-              (function (i) {
-                timerList[i] = setTimeout(()=>{
-                  port.postMessage({request: "confirmInfo", index: i});
-                },time * 1000)
-              })(i)
-            }
-          }
+          timerList = updateStorage(storage,port)
         }
         return;
       }
@@ -43,15 +27,36 @@
         // console.log('我收到了')
         // let list = JSON.parse(msg.localStorage.remain)
         // alert(list[msg.index].content)
+        let storage;
+        try {
+          storage = JSON.parse(msg.localStorage)
+        } catch (e) {
+          storage = msg.localStorage
+        }
+        console.log(storage)
+        try {
+          list = JSON.parse(storage.remain)
+        } catch {
+          list = storage.remain
+        }
+        // 发送通知盒子显示
         message(list[msg.index].content)
         // message(msg.message)
         // alert(msg.message)
       }
+        // 不管是不是都要清空盒子 
         clearTimeout(timerList[msg.index])
         timerList[msg.index] = null;
     }
+
+    if (msg.response === 'updateLocalStorage') {
+      // console.log(timerList)
+      clearTimeList (timerList);
+      timerList = updateStorage(msg.localStorage,port);
+    }
+
     });
-    // message()
+
 })(this)
 
 function getDate () {
@@ -119,4 +124,59 @@ function bindButton() {
   button.addEventListener('mouseleave',function(e){
     button.style.boxShadow = 'none';
   })
+}
+
+function updateStorage (storage,port) {
+  list = [];
+  // JSON格式解析
+  
+  try {
+    storage = JSON.parse(storage)
+  } catch (e) {
+    
+  }
+  console.log(storage)
+  try {
+    list = JSON.parse(storage.remain)
+  } catch {
+    list = storage.remain
+  }
+  
+  // console.log(list)
+  if (!list) return;
+  // list = Array.prototype.slice.call(list)
+  // console.log(Array.isArray(list));
+  // console.log(list)
+  // console.log(list.length);return;
+  // if (list.length <= 0) return;
+  // console.log('updateStorage: ', list)
+  let n = parseInt(list.length)
+  let timerList = new Array(n)
+  // console.log('创建定时器前', timerList);
+  // 遍历设置定时器
+  for (let i = 0; i < n; i++) {
+    // console.log(`现在创建第${i+1}个定时器`)
+    let time = list[i].time - getDate() 
+    if (time > 0) {
+      (function (i) {
+        timerList[i] = setTimeout(()=>{
+          port.postMessage({request: "confirmInfo", index: i});
+        },time * 1000)
+      })(i)
+    }
+  }
+  // console.log('创建定时器后', timerList);
+  return timerList;
+}
+
+function clearTimeList (list) {
+  if (list === undefined) return;
+  let n = list.length;
+  // console.log(n)
+  for (let i = 0; i < n; i++) {
+    clearTimeout(list[i]);
+    // console.log(`已经清空第${i+1}个定时器`)
+    list[i] = null
+  }
+  list = []
 }
