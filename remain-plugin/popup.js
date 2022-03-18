@@ -89,16 +89,18 @@ function crateLongTouchEvent (list) {
       // 取消冒泡事件，避免冲突
       let tmpContent = JSON.parse(JSON.stringify(div.innerHTML))
       timer = setTimeout(()=>{
-        div.innerHTML = `<div id ="${id}-delete">删除</div>`;
-        let _delete = document.getElementById('remian-content-box-' + index + '-delete')
-        console.log(_delete)
-        _delete.addEventListener('click', function (e) {
-          e.preventDefault()
-          // console.log('click')
-          // console.log(tmpContent)
-          div.innerHTML = tmpContent
-        })
-      },500)
+        // div.innerHTML = `<div id ="${id}-delete">删除</div>`;
+        // let _delete = document.getElementById('remian-content-box-' + index + '-delete')
+        // console.log(_delete)
+        // _delete.addEventListener('click', function (e) {
+        //   e.preventDefault()
+        //   // console.log('click')
+        //   // console.log(tmpContent)
+        //   div.innerHTML = tmpContent
+        // })
+        // let pop = document.createElement('div');
+        deleteStorage(index)
+      },1000)
     })
     div.addEventListener('mouseup', function (e) {
       // 取消冒泡事件，避免冲突
@@ -188,7 +190,7 @@ function updateRemainList (list) {
     for (var i = 0; i< list.length; i++) {
       console.log(list[i].time)
       let time = convertDate(list[i].time)
-      console.log(time)
+      // console.log(time)
       // 外壳
       s = s + '<div style="display:flex;width: 90%;height: 60px;margin: 0 auto;box-shadow: 0px 0px 3px 2px #DCDCDC;font-size: 16px;position:relative;border-radius: 10px;margin:10px 3px;" '+ 'id="remian-content-box-' + i+ '"'+'>'
       // 真正内容
@@ -255,13 +257,27 @@ function setStorage (obj) {
   // console.log(backgroundLocalStorage)
   // 按时间排序
   let newlist = sortFun(list)
+  // 通知background，由background通知其他页面
+  // 已经监听background的localstorage的变动
   backgroundLocalStorage.setItem("remain", JSON.stringify(newlist))
   // 刷新DOM
   updateRemainList(newlist);
   updateAddEvent();
+}
+
+function deleteStorage (index) {
+  let list = JSON.parse(backgroundLocalStorage.getItem("remain"));
+  if (!list) {
+    list = []
+  }
+  list.splice(index,1);
+  let newlist = sortFun(list)
   // 通知background，由background通知其他页面
-  // let port = chrome.extension.connect({name: "remain-plugin-channel"});
-  // port.postMessage({request: "updateLocalStorage"});
+  // 已经监听background的localstorage的变动
+  backgroundLocalStorage.setItem("remain", JSON.stringify(newlist))
+  // 刷新DOM
+  updateRemainList(newlist);
+  updateAddEvent();
 }
 
 function updateAddEvent () {

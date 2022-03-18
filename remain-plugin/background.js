@@ -20,12 +20,17 @@ let list = [
     content: '工作再忙，也不要忘记吃饭哟！',
     isStart: true
   }
-]
-// 第一次打开浏览器会调用这里检查是否有值，如果没有就刷新默认任务
-if (!localStorage.getItem('remain')) {
+];
+// console.log(localStorage)
+// 第一次打开加载插件，如果没有就刷新默认任务
+if (!JSON.parse(localStorage.getItem('remain'))) {
+  localStorage.setItem("remain", JSON.stringify(list))
+}
+if (JSON.parse(localStorage.getItem('remain')).length === 0) {
   localStorage.setItem("remain", JSON.stringify(list))
 }
 
+// localStorage.setItem("remain", JSON.stringify(list))
 // localStorage.clear()
 // 监听LocalStorage监听器状态避免多次调用window.addEventListener
 let addEventListenerLocalStorageState = 0;
