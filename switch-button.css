@@ -1,0 +1,91 @@
+:root{
+  --expand-switch-button-size: 20px;
+  --expand-switch-box-width: 50px;
+  --expand-switch-background: calc(var(--expand-switch-button-size) / 2);
+}
+[class^="switch-box"]{
+  width: var(--expand-switch-box-width);
+  height: var(--expand-switch-button-size);
+  /* border: 1px solid #000; */
+  border-radius: var(--expand-switch-button-size);
+  position: relative;
+  overflow: hidden;
+  background-color: #fa777e; 
+}
+[class^="switch-button"]{
+  width: var(--expand-switch-button-size);
+  height: var(--expand-switch-button-size);
+  border-radius: 50%;
+  background-color: #ffffff;
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+[class^="switch-background"]{
+  height: var(--expand-switch-button-size);
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  }
+.button-no-activate{
+  animation-name: moveNoAcitvate;
+  top: 0;
+  left: calc(var(--expand-switch-box-width) - var(--expand-switch-button-size));
+}
+.button-activate {
+  animation-name: moveAcitvate;
+}
+.background-no-activate{
+  width: 40px;
+  animation-name: widthNoActivate;
+  background-color: #72f566;
+}
+.background-activate{
+  width: var(--expand-switch-background);
+  animation-name: widthActivate;
+  background-color: #72f566;
+}
+@keyframes moveAcitvate {
+ 0% {
+     transform: translate(0, 0);
+ }
+ 100%{
+  transform: translate(calc(var(--expand-switch-box-width) - var(--expand-switch-button-size)), 0);
+ }
+}
+@keyframes widthActivate {
+ 0% {
+     width: var(--expand-switch-background);;
+ }
+ 100%{
+    width: calc(var(--expand-switch-box-width) - var(--expand-switch-background));
+ }
+}
+@keyframes moveNoAcitvate {
+  0% {
+      transform: translate(0, 0);
+  }
+  100%{
+   transform: translate(calc(var(--expand-switch-button-size) - var(--expand-switch-box-width)), 0);
+  }
+ }
+ @keyframes widthNoActivate {
+  0% {
+      width: calc(var(--expand-switch-box-width) - var(--expand-switch-background));;
+  }
+  100%{
+     width: var(--expand-switch-background);
+  }
+ }
+

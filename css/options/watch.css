@@ -1,0 +1,121 @@
+:root{
+  --list-color: #ffffff;
+  --card-color: #b695f3;
+  --red-color: #f87e7e;
+  --orange-color: #f5ab66;
+  --yellow-color: #f1f1a5;
+  --blue-color: #a0ecf1;
+  --purple-color: #ee67ee;
+}
+.watch{
+  width: calc(100% - 30px);
+  padding-left: 30px;
+  padding-top: 30px;
+  height: calc(100% - 30px);
+  white-space: nowrap;
+}
+
+/* 添加列表样式 */
+.add-watch-list{
+  width: 200px;
+  line-height: 30px;
+  background-color: var(--background-color);
+  color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.add-list-box{
+  width: 100%;
+  white-space: wrap;
+}
+#addListInput{
+  width: 90%;
+}
+.margin{
+  margin-right: 20px;
+}
+.change-color{
+  background-color: var(--prime-background-color);
+}
+
+/*  */
+.watch-list{
+  width: 200px;
+  min-height: 50px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 30px;
+  background-color: var(--background-color);
+}
+
+.watch-title{
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.watch-list .left{
+  float: left;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+.watch-list .right{
+  float: right;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+.list-function{
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  text-align: justify;
+  color: #ffffff;
+}
+
+/*  拖动盒子样式  */
+.drag-box{
+  margin: 0 5px;
+  width: calc(100% - 10px);
+  margin-bottom: 10px;
+  background-color: #fff;
+  color:#ffffff;
+  border-radius: 4px;
+  background-color: var(--prime-background-color);
+  display: flex;
+  font-size: 12px;
+}
+.drag-tag{
+  width: 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.drag-content,.drag-ddl{
+  padding: 5px;
+  width: calc(100% - 20px);
+  text-align: start;
+}
+
+.drag-ddl{
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.drag-ddl img{
+  width: 20px;
+  height: 20px;
+  color:rgba(255, 255, 255, 0.5)
+}
+.drag-ddl div{
+  padding-left: 10px;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: top;
+}

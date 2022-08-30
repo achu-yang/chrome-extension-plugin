@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./css/options/index.css" charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="./css/options/watch.css">
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <div class="header-item">
+        帮助
+      </div>
+      <div class="header-item">
+        提醒
+      </div>
+      <div class="header-item">
+        记忆
+      </div>
+      <div class="header-item nav-activate">
+        看板
+      </div>
+    </div>
+    <div class="main">
+      <!-- 看板 -->
+      <div class="watch">
+        <div class="add-watch-list">
+          <span id="addList" style="cursor: pointer;">添加列表</span>
+          <div class="add-list-box" style="display: none;">
+            <div><input id="addListInput" type="text"/></div>           
+            <div class="btn margin change-color" id="confirmAddList">确认</div>
+            <div class="btn change-color" id="cancelAddList">取消</div>
+          </div>  
+        </div>
+        <!-- <div class="watch-list">
+          <div class="watch-title">进行中</div>
+          <div class="drag-box" draggable="true">1</div>
+          <div class="list-function">
+            <div class="left">
+              + 新增
+            </div>
+            <div class="right">
+              折叠
+            </div>
+          </div>
+        </div>
+        <div class="watch-list">
+          <div class="watch-title">代办</div>
+          <div class="drag-box" draggable="true">2</div>
+          <div class="list-function">
+            <div class="left">
+              + 新增
+            </div>
+            <div class="right">
+              折叠
+            </div>
+          </div>
+        </div>
+        <div class="watch-list">
+          <div class="watch-title">已完成</div>
+          <div class="drag-box" draggable="true">3</div>
+          <div class="list-function">
+            <div class="left">
+              + 新增
+            </div>
+            <div class="right">
+              折叠
+            </div>
+          </div>
+        </div>
+        <div class="watch-list">
+          <div class="watch-title">进行中</div>
+          <div class="drag-box" draggable="true">4</div>
+          <div class="list-function">
+            <div class="left">
+              + 新增
+            </div>
+            <div class="right">
+              折叠
+            </div>
+          </div>
+        </div>
+        <div class="watch-list">
+          <div class="watch-title">进行中</div>
+          <div class="drag-box" draggable="true">5</div>
+          <div class="list-function">
+            <div class="left">
+              + 新增
+            </div>
+            <div class="right">
+              折叠
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="./options/localStorage.js"></script>
+<script src="./options/nav-event.js"></script>
+<!-- <script src="./options/drag-event.js"></script> -->
+<script src="./options/list-function.js"></script>
+<script src="./options/addList.js"></script>

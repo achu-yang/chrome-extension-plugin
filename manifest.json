@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "One-click Kittens",
+  "description": "This extension demonstrates a browser action with kittens.",
+  "version": "1.0",
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "management"
+  ],
+  "icons": {
+    "16": "icon/context-menu/context-menu-16.png",
+    "48": "icon/context-menu/context-menu-48.png",
+    "128": "icon/context-menu/context-menu-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inject/inject-content-menu.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "commonJs/localStorage.js",
+      "commonJs/tool.js",
+      "background/background.js",
+      "background/notify.js",
+      "background/background-content-menu.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' unsafe-inline'; object-src 'self'"
+}

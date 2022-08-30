@@ -1,0 +1,17 @@
+.remain{
+
+}
+
+.change-inline{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.remain-clock{
+  width: 300px;
+}
+
+/* 日历 */
+.remain-table{
+  width: 600px;
+}
